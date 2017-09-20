@@ -29,6 +29,7 @@
         android:layout_alignEnd="@+id/gvResults"
         android:layout_alignRight="@+id/gvResults"
         android:text="@string/search"
+        android:onClick="onArticleSearch"
         tools:layout_editor_absoluteX="277dp"
         tools:layout_editor_absoluteY="5dp" />
 
