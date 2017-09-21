@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 
 // https://api.nytimes.com/svc/search/v2/articlesearch.json?begin_date=20160112&sort=oldest&fq=android&api-key=a564f5cd99bd45fa8f09100c6b4a6d5c
 
-public class Article {
+public class Article  implements Serializable{
     public String getWebUrl() {
         return webUrl;
     }
