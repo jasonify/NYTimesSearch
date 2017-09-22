@@ -89,6 +89,8 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 Log.d("debug", "clicked filters");
+                Intent intent = new Intent(SearchActivity.this,  FiltersActivity.class);
+                startActivity(intent);
                 return false;
             }
         });
