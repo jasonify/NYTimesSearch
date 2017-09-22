@@ -6,7 +6,20 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.jason.nytimessearch.activities.SearchActivity"
-    tools:showIn="@layout/activity_search">
+    tools:showIn="@layout/activity_search"
+    android:fitsSystemWindows="true"
+    >
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titleTextColor="@android:color/white"
+        android:background="?attr/colorPrimary">
+    </android.support.v7.widget.Toolbar>
+
 
     <EditText
         android:id="@+id/etQuery"
@@ -14,6 +27,7 @@
         android:layout_height="51dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_below="@+id/toolbar"
         android:layout_toLeftOf="@+id/btnSearch"
         android:ems="10"
         android:hint="@string/hint"
@@ -25,6 +39,8 @@
         android:id="@+id/btnSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+
         android:layout_alignBottom="@+id/etQuery"
         android:layout_alignEnd="@+id/gvResults"
         android:layout_alignRight="@+id/gvResults"
