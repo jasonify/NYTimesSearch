@@ -33,6 +33,33 @@ public class FiltersActivity extends AppCompatActivity  implements DatePickerDia
     private void loadInitialData() {
         // TODO: load initial data for spinner and date (passed back and forth between views)
 //        spnrSortOrder.setSelection(1);
+
+        /*
+        // Set arguments for date
+        // https://stackoverflow.com/questions/15459209/passing-argument-to-dialogfragment
+
+        public static MyDialogFragment newInstance(int num) {
+    MyDialogFragment f = new MyDialogFragment();
+
+    // Supply num input as an argument.
+    Bundle args = new Bundle();
+    args.putInt("num", num);
+    f.setArguments(args);
+
+    return f;
+}
+
+
+    // Get arguments
+
+    @Override
+public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    mNum = getArguments().getInt("num");
+    ...
+}
+
+         */
     }
 
     private void bindClickHandlers() {
