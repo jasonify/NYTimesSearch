@@ -47,7 +47,6 @@ public class SearchActivity extends AppCompatActivity {
     }
 
 
-
     public void setupViews() {
         etQuery =  (EditText) findViewById(R.id.etQuery);
         gvResults = (GridView) findViewById(R.id.gvResults);
@@ -73,10 +72,7 @@ public class SearchActivity extends AppCompatActivity {
         // Sets the Toolbar to act as the ActionBar for this Activity window.
         // Make sure the toolbar exists in the activity and is not null
         setSupportActionBar(toolbar);
-
-
     }
-
 
     // Menu icons are inflated just as they were with actionbar
     @Override
