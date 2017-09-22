@@ -83,6 +83,15 @@ public class SearchActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuItem filtersButton = menu.findItem(R.id.menu_item_filters);
+
+        filtersButton.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Log.d("debug", "clicked filters");
+                return false;
+            }
+        });
         return true;
     }
 
