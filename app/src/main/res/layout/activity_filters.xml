@@ -27,7 +27,7 @@
         android:entries="@array/sort_orders_array"
         android:prompt="@string/sort_prompt"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btnDate"
+        android:layout_below="@+id/btnDatePicker"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
 

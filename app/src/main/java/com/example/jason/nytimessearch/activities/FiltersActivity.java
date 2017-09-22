@@ -24,6 +24,8 @@ public class FiltersActivity extends AppCompatActivity  implements DatePickerDia
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_filters);
+
         bindClickHandlers();
     }
 
@@ -32,9 +34,8 @@ public class FiltersActivity extends AppCompatActivity  implements DatePickerDia
         btnDatePicker = (Button) findViewById(R.id.btnDatePicker);
         spnrSortOrder = (Spinner) findViewById(R.id.spnrSortOrder);
 
-        setContentView(R.layout.activity_filters);
         final DatePickerFragment newFragment = new DatePickerFragment();
-        
+
         btnDatePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
