@@ -18,7 +18,7 @@ public class FiltersActivity extends AppCompatActivity  implements DatePickerDia
         setContentView(R.layout.activity_filters);
 
         DatePickerFragment newFragment = new DatePickerFragment();
-        newFragment.show(getFragmentManager(), "datePicker");
+//        newFragment.show(getFragmentManager(), "datePicker");
 
     }
 
