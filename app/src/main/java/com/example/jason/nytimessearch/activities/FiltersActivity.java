@@ -27,6 +27,12 @@ public class FiltersActivity extends AppCompatActivity  implements DatePickerDia
         setContentView(R.layout.activity_filters);
 
         bindClickHandlers();
+        loadInitialData();
+    }
+
+    private void loadInitialData() {
+        // TODO: load initial data for spinner and date (passed back and forth between views)
+//        spnrSortOrder.setSelection(1);
     }
 
     private void bindClickHandlers() {
