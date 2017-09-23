@@ -41,7 +41,8 @@ public class FiltersActivity extends AppCompatActivity  implements DatePickerDia
 
     private void loadInitialData() {
         // TODO: load initial data for spinner and date (passed back and forth between views)
-//        spnrSortOrder.setSelection(1);
+        int sortingOrder = getIntent().getIntExtra("sorting_order", 0);
+        spnrSortOrder.setSelection(sortingOrder);
 
         /*
         // Set arguments for date

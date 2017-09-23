@@ -37,6 +37,7 @@ public class SearchActivity extends AppCompatActivity {
     EndlessScrollListener scrollListener;
     ArrayList<Article> articles;
     ArticleArrayAdapter adapter;
+    int sortingOrder = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +79,11 @@ public class SearchActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+
+                // RETURN TO PARENT ACTIVITY:
+
+                // http://guides.codepath.com/android/Using-Intents-to-Create-Flows#passing-data-to-launched-activities
+
                 Intent i = new Intent(getApplicationContext(), ArticleActivity.class);
                 Article article = articles.get(position);
                 i.putExtra("article", article);
@@ -142,6 +148,7 @@ public class SearchActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem menuItem) {
                 Log.d("debug", "clicked filters");
                 Intent intent = new Intent(SearchActivity.this,  FiltersActivity.class);
+                intent.putExtra("sorting_order", sortingOrder);
                 startActivity(intent);
                 return false;
             }
