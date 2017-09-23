@@ -17,6 +17,7 @@ import com.example.jason.nytimessearch.Article;
 import com.example.jason.nytimessearch.ArticleArrayAdapter;
 import com.example.jason.nytimessearch.EndlessScrollListener;
 import com.example.jason.nytimessearch.R;
+import com.example.jason.nytimessearch.utils.Constants;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -37,7 +38,7 @@ public class SearchActivity extends AppCompatActivity {
     EndlessScrollListener scrollListener;
     ArrayList<Article> articles;
     ArticleArrayAdapter adapter;
-    int sortingOrder = 1;
+    String sortingOrder = "newest";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,7 +150,7 @@ public class SearchActivity extends AppCompatActivity {
                 Log.d("debug", "clicked filters");
                 Intent intent = new Intent(SearchActivity.this,  FiltersActivity.class);
                 intent.putExtra("sorting_order", sortingOrder);
-                startActivity(intent);
+                startActivityForResult(intent, Constants.FILTER_REQUEST_CODE);
                 return false;
             }
         });

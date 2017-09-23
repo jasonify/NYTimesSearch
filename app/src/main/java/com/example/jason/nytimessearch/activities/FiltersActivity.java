@@ -1,6 +1,7 @@
 package com.example.jason.nytimessearch.activities;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 
 import com.example.jason.nytimessearch.R;
 import com.example.jason.nytimessearch.fragments.DatePickerFragment;
@@ -41,9 +43,10 @@ public class FiltersActivity extends AppCompatActivity  implements DatePickerDia
 
     private void loadInitialData() {
         // TODO: load initial data for spinner and date (passed back and forth between views)
-        int sortingOrder = getIntent().getIntExtra("sorting_order", 0);
-        spnrSortOrder.setSelection(sortingOrder);
+        String sortingOrder = getIntent().getStringExtra("sorting_order");
+//        spnrSortOrder.setSelection(sortingOrder);
 
+        setSpinnerToValue(spnrSortOrder, sortingOrder);
         /*
         // Set arguments for date
         // https://stackoverflow.com/questions/15459209/passing-argument-to-dialogfragment
@@ -72,6 +75,20 @@ public void onCreate(Bundle savedInstanceState) {
          */
     }
 
+
+    public void setSpinnerToValue(Spinner spinner, String value) {
+        int index = 0;
+        SpinnerAdapter adapter = spinner.getAdapter();
+        for (int i = 0; i < adapter.getCount(); i++) {
+            if (adapter.getItem(i).equals(value)) {
+                index = i;
+                break; // terminate loop
+            }
+        }
+        spinner.setSelection(index);
+    }
+
+
     private void bindClickHandlers() {
         btnSave = (Button) findViewById(R.id.btnSave);
         btnDatePicker = (Button) findViewById(R.id.btnDatePicker);
@@ -93,6 +110,13 @@ public void onCreate(Bundle savedInstanceState) {
             public void onClick(View view) {
                 String sortOrder = spnrSortOrder.getSelectedItem().toString();
                 Log.d("debug", sortOrder);
+                Intent data = new Intent();
+                // Pass relevant data back as a result
+                data.putExtra("sorting_order", sortOrder);
+
+                // Activity finished ok, return the data
+                setResult(RESULT_OK, data); // set result code and bundle data for response
+                finish();
 
             }
         });

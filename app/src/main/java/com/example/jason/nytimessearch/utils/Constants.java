@@ -6,4 +6,9 @@ package com.example.jason.nytimessearch.utils;
 
 public class Constants {
     public static final String ARTICLE_DATA = "article_data";
+    public static final int FILTER_REQUEST_CODE = 20;
+    public static final int FILTER_RESULT_OK = 20;
+
+
+
 }
