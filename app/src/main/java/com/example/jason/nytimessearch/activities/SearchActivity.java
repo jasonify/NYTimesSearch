@@ -54,12 +54,12 @@ public class SearchActivity extends AppCompatActivity {
         gvResults.setOnScrollListener(new EndlessScrollListener() {
             @Override
             public boolean onLoadMore(int page, int totalItemsCount) {
-                if(page <= 100 ) {
+//                if(page <= 100 ) {
                     Log.d("DEBUG",  "paginating: " + page);
                     loadNextDataFromApi(page);
                     return true;
-                }
-                return false;
+//                }
+//                return false;
             }
         });
 
@@ -106,7 +106,7 @@ public class SearchActivity extends AppCompatActivity {
 
         RequestParams params = new RequestParams();
         params.put("api-key", "a564f5cd99bd45fa8f09100c6b4a6d5c");
-        params.put("page", page + 1);
+        params.put("page", page - 1);
         params.put("q", query);
 
         client.get(url, params, new JsonHttpResponseHandler(){
@@ -177,7 +177,8 @@ public class SearchActivity extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
                     JSONArray docs = response.getJSONObject("response").getJSONArray("docs");
-                    adapter.addAll(Article.parseArticles(docs));
+                    articles.addAll(Article.parseArticles(docs));
+                    adapter.notifyDataSetChanged();
                     Log.d("DEBUG",  articles.toString());
                 } catch (JSONException e) {
                     e.printStackTrace();

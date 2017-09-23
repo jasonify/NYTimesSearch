@@ -21,6 +21,8 @@ public class FiltersActivity extends AppCompatActivity  implements DatePickerDia
     Button btnDatePicker;
     Spinner spnrSortOrder;
 
+//    CheckBox cb
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
