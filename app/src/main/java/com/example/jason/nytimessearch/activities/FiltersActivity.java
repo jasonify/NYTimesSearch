@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 
@@ -20,8 +22,11 @@ public class FiltersActivity extends AppCompatActivity  implements DatePickerDia
     Button btnSave;
     Button btnDatePicker;
     Spinner spnrSortOrder;
+    CheckBox cbArts;
+    CheckBox cbFashion;
+    CheckBox cbSports;
 
-//    CheckBox cb
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +35,8 @@ public class FiltersActivity extends AppCompatActivity  implements DatePickerDia
 
         bindClickHandlers();
         loadInitialData();
+        setupCheckboxes();
+
     }
 
     private void loadInitialData() {
@@ -69,6 +76,8 @@ public void onCreate(Bundle savedInstanceState) {
         btnDatePicker = (Button) findViewById(R.id.btnDatePicker);
         spnrSortOrder = (Spinner) findViewById(R.id.spnrSortOrder);
 
+
+
         final DatePickerFragment newFragment = new DatePickerFragment();
 
         btnDatePicker.setOnClickListener(new View.OnClickListener() {
@@ -88,6 +97,51 @@ public void onCreate(Bundle savedInstanceState) {
         });
     }
 
+    public void setupCheckboxes() {
+        cbArts = (CheckBox) findViewById(R.id.cbArts);
+        cbFashion = (CheckBox) findViewById(R.id.cbFashion);
+        cbSports = (CheckBox) findViewById(R.id.cbSports);
+
+        // Defines a listener for every time a checkbox is checked or unchecked
+        CompoundButton.OnCheckedChangeListener checkListener = new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton view, boolean checked) {
+                // compoundButton is the checkbox
+                // boolean is whether or not checkbox is checked
+                // Check which checkbox was clicked
+                switch (view.getId()) {
+                    case R.id.cbArts:
+                        if (checked) {
+                            // Put some meat on the sandwich
+                        } else {
+                            // Remove the meat
+                        }
+                        break;
+                    case R.id.cbFashion:
+                        if (checked) {
+                            // Put some meat on the sandwich
+                        } else {
+                            // Remove the meat
+                        }
+                        break;
+                    case R.id.cbSports:
+                        if (checked) {
+                            // Cheese me
+                        } else {
+                            // I'm lactose intolerant
+                        }
+                        break;
+                }
+            }
+
+        };
+        cbArts.setOnCheckedChangeListener(checkListener);
+        cbFashion.setOnCheckedChangeListener(checkListener);
+        cbSports.setOnCheckedChangeListener(checkListener);
+
+
+    }
+
     // handle the date selected
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -105,3 +159,6 @@ public void onCreate(Bundle savedInstanceState) {
     }
 
 }
+
+
+

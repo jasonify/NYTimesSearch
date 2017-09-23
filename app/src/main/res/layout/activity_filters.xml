@@ -50,19 +50,19 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvnNewDeskValues"
         >
-        <CheckBox android:id="@+id/checkbox_arts"
+        <CheckBox android:id="@+id/cbArts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Arts" />
 
-        <CheckBox android:id="@+id/checkbox_fashion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sports" />
-        <CheckBox android:id="@+id/checkbox_sports"
+        <CheckBox android:id="@+id/cbFashion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Fashion &amp; Style" />
+        <CheckBox android:id="@+id/cbSports"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sports" />
     </LinearLayout>
 
 
