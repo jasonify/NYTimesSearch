@@ -101,6 +101,10 @@ public void onCreate(Bundle savedInstanceState) {
         btnDatePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Supply num input as an argument.
+                Bundle dateArgs= new Bundle();
+                dateArgs.putInt("year", 2016);
+                newFragment.setArguments(dateArgs);
                 newFragment.show(getFragmentManager(), "datePicker");
             }
         });
