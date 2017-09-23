@@ -34,7 +34,7 @@ public class SearchActivity extends AppCompatActivity {
     EditText etQuery;
     GridView gvResults;
     Button btnSearch;
-
+    EndlessScrollListener scrollListener;
     ArrayList<Article> articles;
     ArticleArrayAdapter adapter;
 
@@ -51,17 +51,20 @@ public class SearchActivity extends AppCompatActivity {
     public void setupViews() {
         etQuery =  (EditText) findViewById(R.id.etQuery);
         gvResults = (GridView) findViewById(R.id.gvResults);
-        gvResults.setOnScrollListener(new EndlessScrollListener() {
+
+        scrollListener = new EndlessScrollListener() {
             @Override
             public boolean onLoadMore(int page, int totalItemsCount) {
 //                if(page <= 100 ) {
-                    Log.d("DEBUG",  "paginating: " + page);
-                    loadNextDataFromApi(page);
-                    return true;
+                Log.d("DEBUG",  "paginating: " + page);
+                loadNextDataFromApi(page);
+                return true;
 //                }
 //                return false;
             }
-        });
+        };
+
+        gvResults.setOnScrollListener(scrollListener);
 
 
 
@@ -162,7 +165,14 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void onArticleSearch(View view) {
+        // 1. First, clear the array of data
+        articles.clear();
+        // 2. Notify the adapter of the update
+        adapter.notifyDataSetChanged();
+        scrollListener.resetState();
+
         String query = etQuery.getText().toString();
+
 
         // Toast.makeText(this, "Searched " + query, Toast.LENGTH_SHORT).show();
         AsyncHttpClient client = new AsyncHttpClient();
