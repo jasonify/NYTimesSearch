@@ -60,6 +60,7 @@ public class SearchActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setupViews();
+        initFilterVariables();
     }
 
 
@@ -223,7 +224,16 @@ public class SearchActivity extends AppCompatActivity {
         params.put("q", query);
 
         if (isFiltered) {
-            params.put("begin_date", "" + year + "" + month + "" + day);
+            String dateString = "" + year;
+
+            if(month < 10) {
+                dateString += "0" + month;
+            }
+            if(day < 10){
+                dateString += "0" + day;
+            }
+            params.put("begin_date", dateString);
+
             params.put("sort", sortingOrder);
 
 

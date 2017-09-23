@@ -28,6 +28,9 @@ public class FiltersActivity extends AppCompatActivity  implements DatePickerDia
     CheckBox cbFashion;
     CheckBox cbSports;
 
+    int year;
+    int month;
+    int day;
 
 
     @Override
@@ -48,10 +51,19 @@ public class FiltersActivity extends AppCompatActivity  implements DatePickerDia
         // TODO: load initial data for spinner and date (passed back and forth between views)
         String sortingOrder = getIntent().getStringExtra("sorting_order");
         setSpinnerToValue(spnrSortOrder, sortingOrder);
+
+        year = getIntent().getIntExtra("year", 2017);
+        month = getIntent().getIntExtra("month", 1);
+        day = getIntent().getIntExtra("day", 1);
+
         Boolean isArtsChecked = getIntent().getBooleanExtra("is_arts_checked", false);
+        Boolean isFashionChecked = getIntent().getBooleanExtra("is_fashion_checked", false);
+        Boolean isSportsChecked = getIntent().getBooleanExtra("is_sports_checked", false);
+
 
         cbArts.setChecked(isArtsChecked);
-
+        cbFashion.setChecked(isFashionChecked);
+        cbSports.setChecked(isSportsChecked);
     }
 
 
@@ -77,12 +89,17 @@ public class FiltersActivity extends AppCompatActivity  implements DatePickerDia
 
         final DatePickerFragment newFragment = new DatePickerFragment();
 
+
+
         btnDatePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Supply num input as an argument.
                 Bundle dateArgs= new Bundle();
-                dateArgs.putInt("year", 2016);
+                dateArgs.putInt("year", year);
+                dateArgs.putInt("month", month);
+                dateArgs.putInt("day", day);
+
                 newFragment.setArguments(dateArgs);
                 newFragment.show(getFragmentManager(), "datePicker");
             }
@@ -94,9 +111,18 @@ public class FiltersActivity extends AppCompatActivity  implements DatePickerDia
                 String sortOrder = spnrSortOrder.getSelectedItem().toString();
                 Log.d("debug", sortOrder);
                 Intent data = new Intent();
+
+                data.putExtra("year", year);
+                data.putExtra("month", month);
+                data.putExtra("day", day);
+
+
                 // Pass relevant data back as a result
                 data.putExtra("sorting_order", sortOrder);
                 data.putExtra("is_arts_checked", cbArts.isChecked());
+                data.putExtra("is_fashion_checked", cbFashion.isChecked());
+                data.putExtra("is_sports_checked", cbSports.isChecked());
+
                 // Activity finished ok, return the data
                 setResult(RESULT_OK, data); // set result code and bundle data for response
                 finish();
@@ -146,8 +172,6 @@ public class FiltersActivity extends AppCompatActivity  implements DatePickerDia
         cbArts.setOnCheckedChangeListener(checkListener);
         cbFashion.setOnCheckedChangeListener(checkListener);
         cbSports.setOnCheckedChangeListener(checkListener);
-
-
     }
 
     // handle the date selected
@@ -161,9 +185,9 @@ public class FiltersActivity extends AppCompatActivity  implements DatePickerDia
 //        int y = c.getTime().getYear();
 
         Calendar cal = c;
-        int y= cal.get(Calendar.YEAR);
-        int m = cal.get(Calendar.MONTH);
-        int d = cal.get(Calendar.DAY_OF_MONTH);
+        year = cal.get(Calendar.YEAR);
+        month  = cal.get(Calendar.MONTH);
+        day = cal.get(Calendar.DAY_OF_MONTH);
     }
 
 }
