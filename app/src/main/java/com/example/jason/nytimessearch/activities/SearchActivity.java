@@ -114,8 +114,9 @@ public class SearchActivity extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
                     JSONArray docs = response.getJSONObject("response").getJSONArray("docs");
-                    adapter.addAll(Article.parseArticles(docs));
-                    Log.d("DEBUG",  articles.toString());
+                    articles.addAll(Article.parseArticles(docs));
+                    adapter.notifyDataSetChanged();
+//                    Log.d("DEBUG",  articles.toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -179,7 +180,7 @@ public class SearchActivity extends AppCompatActivity {
                     JSONArray docs = response.getJSONObject("response").getJSONArray("docs");
                     articles.addAll(Article.parseArticles(docs));
                     adapter.notifyDataSetChanged();
-                    Log.d("DEBUG",  articles.toString());
+//                    Log.d("DEBUG",  articles.toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
