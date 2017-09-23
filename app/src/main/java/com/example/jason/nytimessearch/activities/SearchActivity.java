@@ -227,11 +227,15 @@ public class SearchActivity extends AppCompatActivity {
             month += 1; // Months are in 0 -11 for date Picker :(
             if(month < 10) {
                 dateString += "0" + month;
+            } else{
+                dateString += month;
             }
             month -=1; // Months are in 0 -11 for date Picker :(
 
             if(day < 10){
                 dateString += "0" + day;
+            } else {
+                dateString += day;
             }
             params.put("begin_date", dateString);
 
