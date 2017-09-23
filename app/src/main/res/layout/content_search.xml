@@ -51,9 +51,10 @@
 
     <GridView
         android:id="@+id/gvResults"
+        android:layout_below="@+id/etQuery"
+        android:layout_alignParentBottom="true"
         android:layout_width="360dp"
         android:layout_height="416dp"
-        android:layout_marginTop="64dp"
         android:numColumns="4"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="12dp" />

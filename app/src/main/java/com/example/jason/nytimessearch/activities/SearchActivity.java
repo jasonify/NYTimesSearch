@@ -15,6 +15,7 @@ import android.widget.GridView;
 
 import com.example.jason.nytimessearch.Article;
 import com.example.jason.nytimessearch.ArticleArrayAdapter;
+import com.example.jason.nytimessearch.EndlessScrollListener;
 import com.example.jason.nytimessearch.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -50,6 +51,20 @@ public class SearchActivity extends AppCompatActivity {
     public void setupViews() {
         etQuery =  (EditText) findViewById(R.id.etQuery);
         gvResults = (GridView) findViewById(R.id.gvResults);
+        gvResults.setOnScrollListener(new EndlessScrollListener() {
+            @Override
+            public boolean onLoadMore(int page, int totalItemsCount) {
+                if(page <= 100 ) {
+                    Log.d("DEBUG",  "paginating: " + page);
+                    loadNextDataFromApi(page);
+                    return true;
+                }
+                return false;
+            }
+        });
+
+
+
         btnSearch = (Button) findViewById(R.id.btnSearch);
 
         articles = new ArrayList<>();
@@ -73,6 +88,43 @@ public class SearchActivity extends AppCompatActivity {
         // Make sure the toolbar exists in the activity and is not null
         setSupportActionBar(toolbar);
     }
+
+    // Append the next page of data into the adapter
+    // This method probably sends out a network request and appends new data items to your adapter.
+    public void loadNextDataFromApi(int page) {
+        // Send an API request to retrieve appropriate paginated data
+        //  --> Send the request including an offset value (i.e `page`) as a query parameter.
+        //  --> Deserialize and construct new model objects from the API response
+        //  --> Append the new data objects to the existing set of items inside the array of items
+        //  --> Notify the adapter of the new items made with `notifyDataSetChanged()`
+
+        String query = etQuery.getText().toString();
+        Log.d("query", query + "- page: " + page);
+        // Toast.makeText(this, "Searched " + query, Toast.LENGTH_SHORT).show();
+        AsyncHttpClient client = new AsyncHttpClient();
+        String url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+
+        RequestParams params = new RequestParams();
+        params.put("api-key", "a564f5cd99bd45fa8f09100c6b4a6d5c");
+        params.put("page", page + 1);
+        params.put("q", query);
+
+        client.get(url, params, new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                try {
+                    JSONArray docs = response.getJSONObject("response").getJSONArray("docs");
+                    adapter.addAll(Article.parseArticles(docs));
+                    Log.d("DEBUG",  articles.toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
+    }
+
 
     // Menu icons are inflated just as they were with actionbar
     @Override
