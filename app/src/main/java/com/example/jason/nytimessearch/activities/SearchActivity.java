@@ -28,6 +28,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -39,8 +40,18 @@ public class SearchActivity extends AppCompatActivity {
     EndlessScrollListener scrollListener;
     ArrayList<Article> articles;
     ArticleArrayAdapter adapter;
+
     String sortingOrder = "newest";
-    Boolean isArtsChecked = true;
+
+    int year = 2016;
+    int month = 1;
+    int day = 1;
+
+    Boolean isFiltered = false;
+
+    Boolean isArtsChecked = false;
+    Boolean isFashionChecked = false;
+    Boolean isSportsChecked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +63,17 @@ public class SearchActivity extends AppCompatActivity {
     }
 
 
+    public void initFilterVariables(){
+        final Calendar c = Calendar.getInstance();
+        year = c.get(Calendar.YEAR);
+        month = c.get(Calendar.MONTH);
+        day = c.get(Calendar.DAY_OF_MONTH);
+
+    }
     public void setupViews() {
+
+
+
         etQuery =  (EditText) findViewById(R.id.etQuery);
         gvResults = (GridView) findViewById(R.id.gvResults);
 
@@ -121,6 +142,7 @@ public class SearchActivity extends AppCompatActivity {
         params.put("page", page - 1);
         params.put("q", query);
 
+
         client.get(url, params, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -134,8 +156,6 @@ public class SearchActivity extends AppCompatActivity {
                 }
             }
         });
-
-
     }
 
 
@@ -209,7 +229,16 @@ public class SearchActivity extends AppCompatActivity {
         Log.d("debug", "clicked filters");
         Intent intent = new Intent(SearchActivity.this,  FiltersActivity.class);
         intent.putExtra("sorting_order", sortingOrder);
+
+        intent.putExtra("year", year);
+        intent.putExtra("month", month);
+        intent.putExtra("day", day);
+
         intent.putExtra("is_arts_checked", isArtsChecked);
+        intent.putExtra("is_fashion_checked", isFashionChecked);
+        intent.putExtra("is_sports_checked", isSportsChecked);
+
+
         startActivityForResult(intent, Constants.FILTER_REQUEST_CODE);
     }
 
@@ -218,9 +247,19 @@ public class SearchActivity extends AppCompatActivity {
         // REQUEST_CODE is defined above
         if (resultCode == RESULT_OK && requestCode == Constants.FILTER_REQUEST_CODE) {
             // Extract name value from result extras
-             sortingOrder = data.getExtras().getString("sorting_order");
+            isFiltered = true;
+
+            sortingOrder = data.getExtras().getString("sorting_order");
+
+            year = data.getExtras().getInt("year");
+            month = data.getExtras().getInt("month");
+            day = data.getExtras().getInt("day");
+
             isArtsChecked =  data.getExtras().getBoolean("is_arts_checked");
-//            int code = data.getExtras().getInt("code", 0);
+            isFashionChecked =  data.getExtras().getBoolean("is_fashion_checked");
+            isSportsChecked =  data.getExtras().getBoolean("is_sports_checked");
+
+
             // Toast the name to display temporarily on screen
             Toast.makeText(this, sortingOrder, Toast.LENGTH_SHORT).show();
         } else {
