@@ -32,6 +32,7 @@ public class FiltersActivity extends AppCompatActivity  implements DatePickerDia
     int month;
     int day;
 
+    Boolean dateWasChanged = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +44,13 @@ public class FiltersActivity extends AppCompatActivity  implements DatePickerDia
 
         loadInitialData();
 
-
+        updateDateButton();
 
     }
 
+    public void updateDateButton() {
+        btnDatePicker.setText("Date start: " + year + "/" + (month+1) + "/" + day  );
+    }
     private void loadInitialData() {
         // TODO: load initial data for spinner and date (passed back and forth between views)
         String sortingOrder = getIntent().getStringExtra("sorting_order");
@@ -115,6 +119,9 @@ public class FiltersActivity extends AppCompatActivity  implements DatePickerDia
                 data.putExtra("year", year);
                 data.putExtra("month", month);
                 data.putExtra("day", day);
+
+
+                data.putExtra("date_changed", dateWasChanged);
 
 
                 // Pass relevant data back as a result
@@ -188,6 +195,9 @@ public class FiltersActivity extends AppCompatActivity  implements DatePickerDia
         year = cal.get(Calendar.YEAR);
         month  = cal.get(Calendar.MONTH);
         day = cal.get(Calendar.DAY_OF_MONTH);
+        dateWasChanged = true;
+        updateDateButton();
+
     }
 
 }
