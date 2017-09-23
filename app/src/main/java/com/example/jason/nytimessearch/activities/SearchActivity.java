@@ -131,17 +131,10 @@ public class SearchActivity extends AppCompatActivity {
         //  --> Append the new data objects to the existing set of items inside the array of items
         //  --> Notify the adapter of the new items made with `notifyDataSetChanged()`
 
-        String query = etQuery.getText().toString();
-        Log.d("query", query + "- page: " + page);
-        // Toast.makeText(this, "Searched " + query, Toast.LENGTH_SHORT).show();
         AsyncHttpClient client = new AsyncHttpClient();
         String url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
 
-        RequestParams params = new RequestParams();
-        params.put("api-key", "a564f5cd99bd45fa8f09100c6b4a6d5c");
-        params.put("page", page - 1);
-        params.put("q", query);
-
+        RequestParams params = getUrlParams(page -1);
 
         client.get(url, params, new JsonHttpResponseHandler(){
             @Override
@@ -198,17 +191,13 @@ public class SearchActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
         scrollListener.resetState();
 
-        String query = etQuery.getText().toString();
 
 
         // Toast.makeText(this, "Searched " + query, Toast.LENGTH_SHORT).show();
         AsyncHttpClient client = new AsyncHttpClient();
         String url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
 
-        RequestParams params = new RequestParams();
-        params.put("api-key", "a564f5cd99bd45fa8f09100c6b4a6d5c");
-        params.put("page", 0);
-        params.put("q", query);
+        RequestParams params = getUrlParams(0);
 
         client.get(url, params, new JsonHttpResponseHandler(){
             @Override
@@ -223,6 +212,61 @@ public class SearchActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public RequestParams getUrlParams(int page) {
+        String query = etQuery.getText().toString();
+
+        RequestParams params = new RequestParams();
+        params.put("api-key", "a564f5cd99bd45fa8f09100c6b4a6d5c");
+        params.put("page", page);
+        params.put("q", query);
+
+        if (isFiltered) {
+            params.put("begin_date", "" + year + "" + month + "" + day);
+            params.put("sort", sortingOrder);
+
+
+            // Setup news_desk:
+            String newDesk = "news_desk:(";
+            Boolean addedNewDesk = false;
+            if(isArtsChecked) {
+                newDesk += "\"Arts\"";
+                addedNewDesk = true;
+            }
+
+
+
+            if(isFashionChecked) {
+                if(addedNewDesk){
+                    newDesk += " ";
+                    addedNewDesk = false;
+                }
+
+                newDesk +=   "\"Fashion & Style\"";
+                addedNewDesk = true;
+            }
+
+            if(isSportsChecked) {
+                if(addedNewDesk){
+                    newDesk += " ";
+                    addedNewDesk = false;
+                }
+
+                newDesk +=   "\"Sports\"";
+                addedNewDesk = true;
+            }
+
+            newDesk += ")";
+            Log.d("DEBUG", newDesk);
+            params.put("fq", newDesk);
+
+
+            Log.d("DEBUG", params.toString());
+        }
+
+
+        return params;
     }
 
     private void presentFilters() {
