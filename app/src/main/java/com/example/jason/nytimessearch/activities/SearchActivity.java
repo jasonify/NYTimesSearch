@@ -12,7 +12,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import com.example.jason.nytimessearch.Article;
 import com.example.jason.nytimessearch.ArticleArrayAdapter;
@@ -225,10 +224,12 @@ public class SearchActivity extends AppCompatActivity {
 
         if (isFiltered) {
             String dateString = "" + year;
-
+            month += 1; // Months are in 0 -11 for date Picker :(
             if(month < 10) {
                 dateString += "0" + month;
             }
+            month -=1; // Months are in 0 -11 for date Picker :(
+
             if(day < 10){
                 dateString += "0" + day;
             }
@@ -268,8 +269,12 @@ public class SearchActivity extends AppCompatActivity {
             }
 
             newDesk += ")";
-            Log.d("DEBUG", newDesk);
-            params.put("fq", newDesk);
+            if(!isArtsChecked && !isFashionChecked && !isSportsChecked ) { // None are true so nothing;
+
+            } else {
+                Log.d("DEBUG", newDesk);
+                params.put("fq", newDesk);
+            }
 
 
             Log.d("DEBUG", params.toString());
@@ -315,7 +320,8 @@ public class SearchActivity extends AppCompatActivity {
 
 
             // Toast the name to display temporarily on screen
-            Toast.makeText(this, sortingOrder, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, sortingOrder, Toast.LENGTH_SHORT).show();
+            onArticleSearch(null);
         } else {
             Log.d("DEBUG", "not okay??");
         }
