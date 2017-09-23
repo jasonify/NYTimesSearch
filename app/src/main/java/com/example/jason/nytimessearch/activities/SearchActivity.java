@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import com.example.jason.nytimessearch.Article;
 import com.example.jason.nytimessearch.ArticleArrayAdapter;
@@ -147,10 +148,7 @@ public class SearchActivity extends AppCompatActivity {
         filtersButton.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-                Log.d("debug", "clicked filters");
-                Intent intent = new Intent(SearchActivity.this,  FiltersActivity.class);
-                intent.putExtra("sorting_order", sortingOrder);
-                startActivityForResult(intent, Constants.FILTER_REQUEST_CODE);
+                presentFilters();
                 return false;
             }
         });
@@ -205,4 +203,27 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void presentFilters() {
+        Log.d("debug", "clicked filters");
+        Intent intent = new Intent(SearchActivity.this,  FiltersActivity.class);
+        intent.putExtra("sorting_order", sortingOrder);
+        startActivityForResult(intent, Constants.FILTER_REQUEST_CODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // REQUEST_CODE is defined above
+        if (resultCode == RESULT_OK && requestCode == Constants.FILTER_REQUEST_CODE) {
+            // Extract name value from result extras
+             sortingOrder = data.getExtras().getString("sorting_order");
+//            int code = data.getExtras().getInt("code", 0);
+            // Toast the name to display temporarily on screen
+            Toast.makeText(this, sortingOrder, Toast.LENGTH_SHORT).show();
+        } else {
+            Log.d("DEBUG", "not okay??");
+        }
+    }
+
+
 }
