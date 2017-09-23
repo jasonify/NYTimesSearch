@@ -40,6 +40,7 @@ public class SearchActivity extends AppCompatActivity {
     ArrayList<Article> articles;
     ArticleArrayAdapter adapter;
     String sortingOrder = "newest";
+    Boolean isArtsChecked = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -208,6 +209,7 @@ public class SearchActivity extends AppCompatActivity {
         Log.d("debug", "clicked filters");
         Intent intent = new Intent(SearchActivity.this,  FiltersActivity.class);
         intent.putExtra("sorting_order", sortingOrder);
+        intent.putExtra("is_arts_checked", isArtsChecked);
         startActivityForResult(intent, Constants.FILTER_REQUEST_CODE);
     }
 
@@ -217,6 +219,7 @@ public class SearchActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK && requestCode == Constants.FILTER_REQUEST_CODE) {
             // Extract name value from result extras
              sortingOrder = data.getExtras().getString("sorting_order");
+            isArtsChecked =  data.getExtras().getBoolean("is_arts_checked");
 //            int code = data.getExtras().getInt("code", 0);
             // Toast the name to display temporarily on screen
             Toast.makeText(this, sortingOrder, Toast.LENGTH_SHORT).show();

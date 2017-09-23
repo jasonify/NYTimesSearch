@@ -36,43 +36,22 @@ public class FiltersActivity extends AppCompatActivity  implements DatePickerDia
         setContentView(R.layout.activity_filters);
 
         bindClickHandlers();
-        loadInitialData();
         setupCheckboxes();
+
+        loadInitialData();
+
+
 
     }
 
     private void loadInitialData() {
         // TODO: load initial data for spinner and date (passed back and forth between views)
         String sortingOrder = getIntent().getStringExtra("sorting_order");
-//        spnrSortOrder.setSelection(sortingOrder);
-
         setSpinnerToValue(spnrSortOrder, sortingOrder);
-        /*
-        // Set arguments for date
-        // https://stackoverflow.com/questions/15459209/passing-argument-to-dialogfragment
+        Boolean isArtsChecked = getIntent().getBooleanExtra("is_arts_checked", false);
 
-        public static MyDialogFragment newInstance(int num) {
-    MyDialogFragment f = new MyDialogFragment();
+        cbArts.setChecked(isArtsChecked);
 
-    // Supply num input as an argument.
-    Bundle args = new Bundle();
-    args.putInt("num", num);
-    f.setArguments(args);
-
-    return f;
-}
-
-
-    // Get arguments
-
-    @Override
-public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    mNum = getArguments().getInt("num");
-    ...
-}
-
-         */
     }
 
 
@@ -117,7 +96,7 @@ public void onCreate(Bundle savedInstanceState) {
                 Intent data = new Intent();
                 // Pass relevant data back as a result
                 data.putExtra("sorting_order", sortOrder);
-
+                data.putExtra("is_arts_checked", cbArts.isChecked());
                 // Activity finished ok, return the data
                 setResult(RESULT_OK, data); // set result code and bundle data for response
                 finish();
