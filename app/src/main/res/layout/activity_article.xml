@@ -6,7 +6,20 @@
     android:layout_height="match_parent"
     tools:context="com.example.jason.nytimessearch.activities.ArticleActivity">
 
-    
+
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bartop"
+
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+
+
+    </android.support.design.widget.AppBarLayout>
+
+
     <WebView
         android:id="@+id/wvArticle"
         android:layout_width="match_parent"

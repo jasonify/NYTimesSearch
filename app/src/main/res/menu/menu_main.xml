@@ -7,6 +7,15 @@
         android:id="@+id/menu_item_filters"
         app:showAsAction="ifRoom"
         android:icon="@drawable/play"
+        android:title="Filters"
+        />
+
+    <item
+        android:id="@+id/menu_item_share"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/spinner"
+        app:actionProviderClass="android.support.v7.widget.ShareActionProvider"
+
         android:title="Share"
         />
 

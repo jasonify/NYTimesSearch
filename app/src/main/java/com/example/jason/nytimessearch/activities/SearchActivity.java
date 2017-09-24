@@ -141,7 +141,8 @@ public class SearchActivity extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
                     JSONArray docs = response.getJSONObject("response").getJSONArray("docs");
-                    articles.addAll(Article.parseArticles(docs));
+                    ArrayList<Article> newArticles = Article.parseArticles(docs);
+                    articles.addAll(newArticles);
                     adapter.notifyDataSetChanged();
 //                    Log.d("DEBUG",  articles.toString());
                 } catch (JSONException e) {
@@ -250,8 +251,6 @@ public class SearchActivity extends AppCompatActivity {
                 addedNewDesk = true;
             }
 
-
-
             if(isFashionChecked) {
                 if(addedNewDesk){
                     newDesk += " ";
@@ -321,7 +320,6 @@ public class SearchActivity extends AppCompatActivity {
             isArtsChecked =  data.getExtras().getBoolean("is_arts_checked");
             isFashionChecked =  data.getExtras().getBoolean("is_fashion_checked");
             isSportsChecked =  data.getExtras().getBoolean("is_sports_checked");
-
 
             // Toast the name to display temporarily on screen
 //            Toast.makeText(this, sortingOrder, Toast.LENGTH_SHORT).show();
