@@ -43,16 +43,14 @@ public class ArticleArrayAdapter extends ArrayAdapter<Article> {
             if(!TextUtils.isEmpty(thumbnail)) {
                 Picasso.with(getContext())
                         .load(thumbnail)
-                        .placeholder(R.drawable.spinner)
+                        .placeholder(R.drawable.spinner_small)
                         .error(R.drawable.error)
                         .into(imageView);
 
             } else {
-                imageView.setImageResource(R.drawable.gradient);
+                imageView.setImageResource(R.drawable.gradient_small);
             }
 
         return convertView;
     }
-
-
 }
