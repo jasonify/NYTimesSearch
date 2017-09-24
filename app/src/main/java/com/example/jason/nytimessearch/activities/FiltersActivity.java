@@ -49,7 +49,7 @@ public class FiltersActivity extends AppCompatActivity  implements DatePickerDia
     }
 
     public void updateDateButton() {
-        btnDatePicker.setText("Date start: " + year + "/" + (month+1) + "/" + day  );
+        btnDatePicker.setText(" " + year + "/" + (month+1) + "/" + day  );
     }
     private void loadInitialData() {
         // TODO: load initial data for spinner and date (passed back and forth between views)

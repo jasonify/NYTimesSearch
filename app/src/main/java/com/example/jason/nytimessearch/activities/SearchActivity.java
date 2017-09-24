@@ -243,7 +243,7 @@ public class SearchActivity extends AppCompatActivity {
             }
             params.put("begin_date", dateString);
 
-            params.put("sort", sortingOrder);
+            params.put("sort", sortingOrder.toLowerCase());
 
 
             // Setup news_desk:
