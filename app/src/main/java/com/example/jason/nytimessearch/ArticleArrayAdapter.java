@@ -48,7 +48,7 @@ public class ArticleArrayAdapter extends ArrayAdapter<Article> {
                         .into(imageView);
 
             } else {
-                imageView.setImageResource(R.drawable.logo);
+                imageView.setImageResource(R.drawable.gradient);
             }
 
         return convertView;
