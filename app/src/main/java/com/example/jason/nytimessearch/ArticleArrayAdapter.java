@@ -48,7 +48,7 @@ public class ArticleArrayAdapter extends ArrayAdapter<Article> {
                         .into(imageView);
 
             } else {
-                // imageView.
+                imageView.setImageResource(R.drawable.logo);
             }
 
         return convertView;
