@@ -6,7 +6,7 @@
     <item
         android:id="@+id/menu_item_filters"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/play"
+        android:icon="@drawable/filters"
         android:title="Filters"
         />
 
