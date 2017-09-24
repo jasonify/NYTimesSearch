@@ -8,16 +8,36 @@
 
 
 
-    <Button
-        android:id="@+id/btnDatePicker"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"
-        android:text="Pick a date" />
+        android:id="@+id/beginDateArea"
+        android:layout_marginTop="40dp"
+        android:orientation="horizontal"
+        >
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="Begin Date: "
+
+            />
+
+        <Button
+            android:id="@+id/btnDatePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:text="Pick a date" />
+
+    </LinearLayout>
 
     <!-- TODO: put a simple container here with horizontal alignment -->
 
@@ -28,7 +48,7 @@
         android:entries="@array/sort_orders_array"
         android:prompt="@string/sort_prompt"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btnDatePicker"
+        android:layout_below="@+id/beginDateArea"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:layout_alignParentLeft="true"
