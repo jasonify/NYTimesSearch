@@ -160,6 +160,9 @@ public class SearchActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         MenuItem filtersButton = menu.findItem(R.id.menu_item_filters);
 
+        MenuItem shareItem = menu.findItem(R.id.menu_item_share);
+        shareItem.setVisible(false);
+
         filtersButton.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {

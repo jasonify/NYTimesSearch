@@ -44,29 +44,22 @@ public class ArticleActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu_main, menu);
 
         MenuItem item = menu.findItem(R.id.menu_item_share);
+        item.setVisible(true);
 
         ShareActionProvider miShare = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
 
         // get reference to WebView
-
-
-
-        Article article  = (Article) getIntent().getSerializableExtra("article");
-
-
+        WebView wvArticle = (WebView) findViewById(R.id.wvArticle);
         // pass in the URL currently being used by the WebView
-        shareIntent.putExtra(Intent.EXTRA_TEXT, "https://google.com/");
-        if(shareIntent != null) {
-            miShare.setShareIntent(shareIntent);
-        }
+        shareIntent.putExtra(Intent.EXTRA_TEXT, wvArticle.getUrl());
+
+        miShare.setShareIntent(shareIntent);
         return super.onCreateOptionsMenu(menu);
     }
 
 
-    // [ ] change icon
-    // [ ]
 
 
 
