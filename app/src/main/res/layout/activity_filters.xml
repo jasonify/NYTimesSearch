@@ -21,6 +21,8 @@
 
     <!-- TODO: put a simple container here with horizontal alignment -->
 
+
+
     <Spinner
         android:id="@+id/spnrSortOrder"
         android:layout_width="wrap_content"
@@ -36,7 +38,7 @@
         android:layout_marginTop="10dp" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Desk Values"
         android:id="@+id/tvnNewDeskValues"
@@ -46,9 +48,10 @@
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvnNewDeskValues"
+        android:layout_alignRight="@+id/tvnNewDeskValues"
+        android:layout_below="@+id/spnrSortOrder"
         >
         <CheckBox android:id="@+id/cbArts"
             android:layout_width="wrap_content"
@@ -64,6 +67,7 @@
             android:layout_height="wrap_content"
             android:text="Sports" />
     </LinearLayout>
+
 
 
     <Button
